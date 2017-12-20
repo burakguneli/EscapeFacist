@@ -29,6 +29,7 @@ pygame.display.set_caption('Escape North Korea')
 clock = pygame.time.Clock()
 
 rockImg = pygame.image.load('img/rock.png')
+whaleImg = pygame.image.load('img/whale.png')
 swimmerImage = pygame.image.load('img/ge1.png')
 swimmerImage = pygame.transform.scale(swimmerImage, (75, 120))
 
@@ -38,9 +39,11 @@ def score(count):
     text = font.render("Dodged: "+str(count), True, black)
     gameDisplay.blit(text,(0,0))
 
-def rocks(rockx, rocky, rockw, rockh, color):
-    #pygame.draw.rect(gameDisplay, color, [rockx, rocky, rockw, rockh])
+def rocks(rockx, rocky, rockw, rockh):
     gameDisplay.blit(rockImg, [rockx, rocky, rockw, rockh])
+
+def whale(whalex, whaley, whalew, whaleh):
+    gameDisplay.blit(rockImg, [whalex, whaley, whalew, whaleh])
 
 def wave(wavex, wavey, wavew, waveh):
     gameDisplay.blit(waveImage, [wavex, wavey, wavew, waveh])
@@ -62,10 +65,7 @@ def message_display(text):
 
     time.sleep(2)
 
-    game_loop()
-
-def crash():
-    message_display('You crashed to a rock')
+    sailing_game()
 
 def button(msg,x,y,w,h,ic,ac,action=None):
     mouse = pygame.mouse.get_pos()
@@ -102,7 +102,7 @@ def game_intro():
         TextRect.center = ((display_width/2),(display_height/3.5))
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("Start New Game",((display_width - 200)/2), 350, 200, 50, green, bright_green, game_loop)
+        button("Start New Game",((display_width - 200)/2), 350, 200, 50, green, bright_green, sailing_game)
         button("Continue Saved",((display_width - 200)/2), 450, 200, 50, red, bright_red)
         button("Exit Game",((display_width - 200)/2), 550, 200, 50, red, bright_red, quitgame)
 
@@ -110,20 +110,22 @@ def game_intro():
         clock.tick(15)
 
 
-def game_loop():
+def sailing_game():
     x = (display_width * 0.45)
-    y = (display_height * 0.8)
+    y = (display_height * 0.85)
 
     x_change = 0
-    thing_starty = -600
-    thing_speed = random.randrange(11)
-    thing_width = 100
-    thing_height = 100
+    rock_starty = (random.randrange(100, 500) * (-1))
+    rock_starty1 = (random.randrange(100, 300) * (-1))
+    rock_speed = random.randrange(10, 15)
+    rock_width = 100
+    rock_height = 100
 
-    thing_startx = random.randrange(0, display_width - thing_width)
+    rock_startx = random.randrange(0, display_width - (rock_width * 2))
+    rock_startx1 = random.randrange(0, display_width - (rock_width * 2))
 
     wave_starty = -600
-    thingCount = 1
+    rockCount = 2
     dodged = 0
 
     gameExit = False
@@ -149,10 +151,12 @@ def game_loop():
         gameDisplay.blit(seaImage, [0,0])
 
         wave(0, wave_starty, 1240, 1000)
-        rocks(thing_startx, thing_starty, thing_width, thing_height, block_color)
+        rocks(rock_startx, rock_starty, rock_width, rock_height)
+        rocks(rock_startx1, rock_starty1, rock_width, rock_height)
 
-        thing_starty += thing_speed
-        wave_starty += thing_speed
+        rock_starty += rock_speed
+        rock_starty1 += rock_speed
+        wave_starty += rock_speed
         boat(x,y)
         score(dodged)
 
@@ -162,17 +166,22 @@ def game_loop():
         if wave_starty > (display_height / 2):
             wave_starty = 0 - 1000
 
-        if thing_starty > display_height:
-            thing_starty = 0 - thing_height
-            thing_startx = random.randrange(0,display_width)
+        if rock_starty > display_height:
+            rock_starty = 0 - rock_height - random.randrange(100, 700)
+            rock_starty1 = 0 - rock_height
+            rock_startx = random.randrange(0,display_width)
+            rock_startx1 = random.randrange(0,display_width)
             dodged += 1
-            thing_speed += 1.5
-            thing_width += (dodged * 1.2)
 
-        if y < thing_starty+thing_height:
+            if rock_speed < 20:
+                rock_speed += 1.5
 
-            if x > thing_startx and x < thing_startx + thing_width or x+boat_width > thing_startx and x + boat_width < thing_startx+thing_width:
-                crash()
+            rock_width += (dodged * 1.2)
+
+        if y < rock_starty+rock_height:
+
+            if x > rock_startx and x < rock_startx + rock_width or x+boat_width > rock_startx and x + boat_width < rock_startx+rock_width:
+                message_display('You crashed to a rock')
 
         button("X",1200,20,20,20,transparent_red,transparent_red,game_intro)
 
@@ -180,5 +189,5 @@ def game_loop():
         clock.tick(60)
 
 game_intro()
-game_loop()
+sailing_game()
 quitgame()
