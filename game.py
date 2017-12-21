@@ -3,6 +3,7 @@ import time
 import random
 
 pygame.init()
+pygame.mixer.init()
 
 display_width = 1240
 display_height = 720
@@ -92,9 +93,13 @@ def quitgame():
 
 def game_intro():
 
+    pygame.mixer.music.load("sound/sytlanta_title.mp3")
+    pygame.mixer.music.play()
+
     intro = True
 
     while intro:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quitgame()
@@ -123,7 +128,7 @@ def game_won():
 
         gameDisplay.blit(southSuccessImage, [0,0])
 
-        message_display('You are now in South Korea. Congratulations!')
+        message_display('You are now in South Korea.')
         time.sleep(3)
         game_intro()
 
@@ -150,14 +155,18 @@ def sailing_game():
     rock_starty = (random.randrange(100, 500) * (-1))
     rock_starty1 = (random.randrange(100, 300) * (-1))
     objects_speed = random.randrange(15, 20)
-    land_counter = 30
+    land_counter = 36
     rock_width = 100
     rock_height = 100
 
     rock_startx = random.randrange(50, 800)
     rock_startx1 = random.randrange(50, 800)
+    land_starty = -400
 
     wave_starty = -600
+
+    pygame.mixer.music.load("sound/water.mp3")
+    pygame.mixer.music.play()
 
     gameExit = False
 
@@ -182,12 +191,18 @@ def sailing_game():
         gameDisplay.blit(seaImage, [0,0])
 
         wave(0, wave_starty, 1240, 1000)
+
         rocks(rock_startx, rock_starty, rock_width, rock_height)
         rocks(rock_startx1, rock_starty1, rock_width, rock_height)
 
         rock_starty += objects_speed
         rock_starty1 += objects_speed
-        wave_starty += objects_speed
+        wave_starty += objects_speed + random.randrange(0,5)
+        land_starty += objects_speed
+
+        if land_starty < -100:
+            land_starty += objects_speed
+
         boat(boat_x, boat_y)
 
         if wave_starty > (display_height / 2):
@@ -209,6 +224,11 @@ def sailing_game():
                 land_counter += 2
 
                 if land_counter == 40:
+
+                    pygame.draw.rect(gameDisplay, green,(0, land_starty, 1240, 200))
+
+                    message_display("Congratulations!")
+                    time.sleep(1)
                     game_won()
 
         if boat_y < rock_starty + rock_height:
