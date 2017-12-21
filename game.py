@@ -119,7 +119,7 @@ def sailing_game():
 
         rock_starty += objects_speed
         rock_starty1 += objects_speed
-        wave_starty += objects_speed + random.randrange(0,5)
+        wave_starty += objects_speed + random.randrange(0, 5)
         land_starty += objects_speed
 
         if land_starty < -100:
@@ -177,6 +177,16 @@ def shooting_game():
     bullet_y = (display_height * 0.83)
     shoot_y = 0
 
+    enemy_startx = random.randrange(50, 800)
+    enemy_startx1 = random.randrange(50, 800)
+    enemy_speed = random.randrange(5,10)
+
+    enemy_starty = (random.randrange(100, 500) * (-1))
+    enemy_starty1 = (random.randrange(100, 300) * (-1))
+
+    firstCheck = 1
+    firstCheck1 = 1
+
     shooter = True
 
     pygame.mouse.set_visible(0)
@@ -201,9 +211,48 @@ def shooting_game():
         x,y = pygame.mouse.get_pos()
         soldier(x, soldier_y)
 
+        enemy(enemy_startx, enemy_starty)
+        enemy(enemy_startx1, enemy_starty1)
+
+        enemy_starty += enemy_speed
+        enemy_starty1 += enemy_speed
+
+        if random.randrange(5, 100) < enemy_starty < display_height:
+            if firstCheck == 1:
+                bulletStart = enemy_starty
+                firstCheck = 0
+
+            bullet(enemy_startx, bulletStart)
+            bulletStart += 25
+
+            if bulletStart >= (display_height * 0.85) and x < enemy_startx < (x + 50):
+                message_display("vuruldun ustaaa")
+                time.sleep(2)
+
+        if random.randrange(5, 100) < enemy_starty1 < display_height:
+            if firstCheck1 == 1:
+                bulletStart1 = enemy_starty1
+                firstCheck1 = 0
+
+            bullet(enemy_startx1, bulletStart1)
+            bulletStart1 += 25
+
+            if bulletStart1 >= (display_height * 0.85) and x < enemy_startx1 < (x + 50):
+                message_display("vuruldun ustaaa")
+                time.sleep(2)
+
+        if enemy_starty > display_height:
+            enemy_starty = -100 - random.randrange(100, 700)
+            enemy_starty1 = -100
+            enemy_startx = random.randrange(0, display_width)
+            enemy_startx1 = random.randrange(0, display_width)
+
+            firstCheck = 1
+            firstCheck1 = 1
+
         if shoot_y > 0:
             bullet(shoot_x, shoot_y)
-            shoot_y -= 40
+            shoot_y -= 45
 
         pygame.display.update()
         clock.tick(30)

@@ -15,6 +15,9 @@ def boat(x,y):
 def soldier(x,y):
     gameDisplay.blit(soldierImage, (x,y))
 
+def enemy(x,y):
+    gameDisplay.blit(enemyImage, (x,y))
+
 def bullet(x,y):
     gameDisplay.blit(bulletImage, (x,y))
 

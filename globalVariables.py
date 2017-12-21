@@ -45,5 +45,7 @@ boatImage = pygame.image.load('img/ge1.png')
 boatImage = pygame.transform.scale(boatImage, (75, 120))
 
 soldierImage = pygame.image.load('img/soldier.png')
+enemyImage = pygame.image.load('img/enemy.png')
+
 bulletImage = pygame.image.load('img/bullet1.png')
 bulletImage = pygame.transform.scale(bulletImage, (15, 25))
