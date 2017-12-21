@@ -29,6 +29,9 @@ lostImage = pygame.transform.scale(lostImage, (1240, 720))
 seaImage = pygame.image.load('img/bg1.png')
 seaImage = pygame.transform.scale(seaImage, (1240, 720))
 
+cityImage = pygame.image.load('img/city.jpg')
+cityImage = pygame.transform.scale(cityImage, (1240, 720))
+
 waveImage = pygame.image.load('img/wave.png')
 
 gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
@@ -40,3 +43,7 @@ whaleImg = pygame.image.load('img/whale.png')
 
 boatImage = pygame.image.load('img/ge1.png')
 boatImage = pygame.transform.scale(boatImage, (75, 120))
+
+soldierImage = pygame.image.load('img/soldier.png')
+bulletImage = pygame.image.load('img/bullet1.png')
+bulletImage = pygame.transform.scale(bulletImage, (15, 25))

@@ -6,6 +6,8 @@ def quitgame():
 
 def game_intro():
 
+    pygame.mouse.set_visible(1)
+
     pygame.mixer.music.load("sound/sytlanta_title.mp3")
     pygame.mixer.music.play()
 
@@ -24,13 +26,15 @@ def game_intro():
         gameDisplay.blit(TextSurf, TextRect)
 
         button("Try Sailing to North Korea", ((display_width - 200)/2), 350, 200, 50, green, sailing_game)
-        button("Try Running Trough DMZ", ((display_width - 200)/2), 450, 200, 50, red, game_won)
+        button("Try Running Trough DMZ", ((display_width - 200)/2), 450, 200, 50, red, shooting_game)
         button("Exit Game", ((display_width - 200)/2), 550, 200, 50, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
 
 def game_won():
+
+    pygame.mouse.set_visible(1)
 
     won = True
 
@@ -47,6 +51,8 @@ def game_won():
 
 def game_lost():
 
+    pygame.mouse.set_visible(1)
+
     lost = True
 
     while lost:
@@ -61,6 +67,9 @@ def game_lost():
         game_intro()
 
 def sailing_game():
+
+    pygame.mouse.set_visible(0)
+
     boat_x = (display_width * 0.45)
     boat_y = (display_height * 0.85)
 
@@ -159,6 +168,42 @@ def sailing_game():
                 game_lost()
 
         button("X", 1200, 20, 20, 20, transparent_red, game_intro)
+
+        pygame.display.update()
+        clock.tick(30)
+
+def shooting_game():
+    soldier_y = (display_height * 0.85)
+    bullet_y = (display_height * 0.83)
+    shoot_y = 0
+
+    shooter = True
+
+    pygame.mouse.set_visible(0)
+
+    while shooter:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and shoot_y < 1:
+                    shoot_y = bullet_y
+                    shoot_x = x + 25
+                    pygame.mixer.music.load("sound/bullet.mp3")
+                    pygame.mixer.music.play()
+
+        gameDisplay.blit(cityImage, [0,0])
+        x,y = pygame.mouse.get_pos()
+        soldier(x, soldier_y)
+
+        if shoot_y > 0:
+            bullet(shoot_x, shoot_y)
+            shoot_y -= 40
 
         pygame.display.update()
         clock.tick(30)

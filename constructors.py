@@ -12,6 +12,12 @@ def wave(wavex, wavey, wavew, waveh):
 def boat(x,y):
     gameDisplay.blit(boatImage, (x,y))
 
+def soldier(x,y):
+    gameDisplay.blit(soldierImage, (x,y))
+
+def bullet(x,y):
+    gameDisplay.blit(bulletImage, (x,y))
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
