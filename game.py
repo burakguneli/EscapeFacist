@@ -34,11 +34,6 @@ swimmerImage = pygame.image.load('img/ge1.png')
 swimmerImage = pygame.transform.scale(swimmerImage, (75, 120))
 
 
-def score(count):
-    font = pygame.font.SysFont(None, 25)
-    text = font.render("Dodged: "+str(count), True, black)
-    gameDisplay.blit(text,(0,0))
-
 def rocks(rockx, rocky, rockw, rockh):
     gameDisplay.blit(rockImg, [rockx, rocky, rockw, rockh])
 
@@ -67,20 +62,24 @@ def message_display(text):
 
     sailing_game()
 
-def button(msg,x,y,w,h,ic,ac,action=None):
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-    if x+w > mouse[0] > x and y+h > mouse[1] > y:
-        pygame.draw.rect(gameDisplay, ac,(x,y,w,h))
+def score(count):
+    font = pygame.font.SysFont(None, 25)
+    text = font.render("Dodged: "+str(count), True, black)
+    gameDisplay.blit(text,(0,0))
 
+def button(mesage, x_coordinate, y_coordinate, width, height, color, action = None):
+    click = pygame.mouse.get_pressed()
+    mouse_pos = pygame.mouse.get_pos()
+
+    pygame.draw.rect(gameDisplay, color,(x_coordinate, y_coordinate, width, height))
+    
+    if x_coordinate + width > mouse_pos[0] > x_coordinate and y_coordinate + height > mouse_pos[1] > y_coordinate:
         if click[0] == 1 and action != None:
             action()
-    else:
-        pygame.draw.rect(gameDisplay, ic,(x,y,w,h))
 
     smallText = pygame.font.SysFont("comicsansms",20)
-    textSurf, textRect = text_objects(msg, smallText)
-    textRect.center = ( (x+(w/2)), (y+(h/2)) )
+    textSurf, textRect = text_objects(mesage, smallText)
+    textRect.center = ( (x_coordinate + (width/2)), (y_coordinate + (height/2)) )
     gameDisplay.blit(textSurf, textRect)
 
 def quitgame():
@@ -102,9 +101,9 @@ def game_intro():
         TextRect.center = ((display_width/2),(display_height/3.5))
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("Start New Game",((display_width - 200)/2), 350, 200, 50, green, bright_green, sailing_game)
-        button("Continue Saved",((display_width - 200)/2), 450, 200, 50, red, bright_red)
-        button("Exit Game",((display_width - 200)/2), 550, 200, 50, red, bright_red, quitgame)
+        button("Try Sailing to North Korea", ((display_width - 200)/2), 350, 200, 50, green, sailing_game)
+        button("Try Running Trough DMZ", ((display_width - 200)/2), 450, 200, 50, red)
+        button("Exit Game", ((display_width - 200)/2), 550, 200, 50, red, quitgame)
 
         pygame.display.update()
         clock.tick(15)
@@ -114,7 +113,7 @@ def sailing_game():
     x = (display_width * 0.45)
     y = (display_height * 0.85)
 
-    x_change = 0
+    vertical_change = 0
     rock_starty = (random.randrange(100, 500) * (-1))
     rock_starty1 = (random.randrange(100, 300) * (-1))
     rock_speed = random.randrange(10, 15)
@@ -125,7 +124,6 @@ def sailing_game():
     rock_startx1 = random.randrange(0, display_width - (rock_width * 2))
 
     wave_starty = -600
-    rockCount = 2
     dodged = 0
 
     gameExit = False
@@ -138,16 +136,16 @@ def sailing_game():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    x_change = -10
+                    vertical_change = -10
 
                 if event.key == pygame.K_RIGHT:
-                    x_change = 10
+                    vertical_change = 10
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    x_change = 0
+                    vertical_change = 0
 
-        x += x_change
+        x += vertical_change
         gameDisplay.blit(seaImage, [0,0])
 
         wave(0, wave_starty, 1240, 1000)
@@ -183,7 +181,7 @@ def sailing_game():
             if x > rock_startx and x < rock_startx + rock_width or x+boat_width > rock_startx and x + boat_width < rock_startx+rock_width:
                 message_display('You crashed to a rock')
 
-        button("X",1200,20,20,20,transparent_red,transparent_red,game_intro)
+        button("X", 1200, 20, 20, 20, transparent_red, game_intro)
 
         pygame.display.update()
         clock.tick(60)
