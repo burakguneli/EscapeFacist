@@ -217,7 +217,7 @@ def shooting_game():
         enemy_starty += enemy_speed
         enemy_starty1 += enemy_speed
 
-        if random.randrange(5, 100) < enemy_starty < display_height:
+        if 10 < enemy_starty < display_height:
             if firstCheck == 1:
                 bulletStart = enemy_starty
                 firstCheck = 0
@@ -225,11 +225,12 @@ def shooting_game():
             bullet(enemy_startx, bulletStart)
             bulletStart += 25
 
-            if bulletStart >= (display_height * 0.85) and x < enemy_startx < (x + 50):
-                message_display("vuruldun ustaaa")
-                time.sleep(2)
+            if bulletStart >= soldier_y and x < enemy_startx < (x + 50):
+                message_display("You got shot!")
+                time.sleep(1)
+                game_lost()
 
-        if random.randrange(5, 100) < enemy_starty1 < display_height:
+        if 20 < enemy_starty1 < display_height:
             if firstCheck1 == 1:
                 bulletStart1 = enemy_starty1
                 firstCheck1 = 0
@@ -237,9 +238,10 @@ def shooting_game():
             bullet(enemy_startx1, bulletStart1)
             bulletStart1 += 25
 
-            if bulletStart1 >= (display_height * 0.85) and x < enemy_startx1 < (x + 50):
-                message_display("vuruldun ustaaa")
-                time.sleep(2)
+            if bulletStart1 >= soldier_y and x < enemy_startx1 < (x + 50):
+                message_display("You got shot!")
+                time.sleep(1)
+                game_lost()
 
         if enemy_starty > display_height:
             enemy_starty = -100 - random.randrange(100, 700)
