@@ -68,7 +68,7 @@ def game_lost():
 
 def sailing_game():
 
-    pygame.mouse.set_visible(0)
+    pygame.mouse.set_visible(1)
 
     boat_x = (display_width * 0.45)
     boat_y = (display_height * 0.85)
@@ -112,7 +112,7 @@ def sailing_game():
         boat_x += vertical_change
         gameDisplay.blit(seaImage, [0,0])
 
-        wave(0, wave_starty, 1240, 1000)
+        wave(0, wave_starty, 1280, 1000)
 
         rocks(rock_startx, rock_starty, rock_width, rock_height)
         rocks(rock_startx1, rock_starty1, rock_width, rock_height)
@@ -147,7 +147,7 @@ def sailing_game():
 
                 if land_counter == 40:
 
-                    pygame.draw.rect(gameDisplay, green,(0, land_starty, 1240, 200))
+                    pygame.draw.rect(gameDisplay, green,(0, land_starty, 1280, 200))
 
                     message_display("Congratulations!")
                     time.sleep(1)
@@ -187,6 +187,8 @@ def shooting_game():
     firstCheck = 1
     firstCheck1 = 1
 
+    dodged = 0
+
     shooter = True
 
     pygame.mouse.set_visible(0)
@@ -217,6 +219,7 @@ def shooting_game():
         enemy_starty += enemy_speed
         enemy_starty1 += enemy_speed
 
+
         if 10 < enemy_starty < display_height:
             if firstCheck == 1:
                 bulletStart = enemy_starty
@@ -225,7 +228,7 @@ def shooting_game():
             bullet(enemy_startx, bulletStart)
             bulletStart += 25
 
-            if bulletStart >= soldier_y and x < enemy_startx < (x + 50):
+            if soldier_y <= bulletStart <= display_height and x < enemy_startx < (x + 50):
                 message_display("You got shot!")
                 time.sleep(1)
                 game_lost()
@@ -238,24 +241,32 @@ def shooting_game():
             bullet(enemy_startx1, bulletStart1)
             bulletStart1 += 25
 
-            if bulletStart1 >= soldier_y and x < enemy_startx1 < (x + 50):
+            if soldier_y <= bulletStart1 <= display_height and x < enemy_startx1 < (x + 50):
                 message_display("You got shot!")
                 time.sleep(1)
                 game_lost()
 
+
         if enemy_starty > display_height:
             enemy_starty = -100 - random.randrange(100, 700)
-            enemy_starty1 = -100
             enemy_startx = random.randrange(0, display_width)
-            enemy_startx1 = random.randrange(0, display_width)
-
             firstCheck = 1
+            dodged += 1
+
+        if enemy_starty1 > display_height:
+            enemy_starty1 = -100
+            enemy_startx1 = random.randrange(0, display_width)
             firstCheck1 = 1
+            dodged += 1
 
         if shoot_y > 0:
             bullet(shoot_x, shoot_y)
             shoot_y -= 45
 
+        if dodged > 20:
+            game_won()
+
+        score(dodged)
         pygame.display.update()
         clock.tick(30)
 

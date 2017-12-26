@@ -5,7 +5,7 @@ import random
 pygame.init()
 pygame.mixer.init()
 
-display_width = 1240
+display_width = 1280
 display_height = 720
 
 black = (0,0,0)
@@ -22,15 +22,15 @@ boat_width = 75
 
 backgorundImage = pygame.image.load('img/korea.jpg')
 southSuccessImage = pygame.image.load('img/gate.png')
-southSuccessImage = pygame.transform.scale(southSuccessImage, (1240, 720))
+southSuccessImage = pygame.transform.scale(southSuccessImage, (1280, 720))
 lostImage = pygame.image.load('img/blizzardskull.png')
-lostImage = pygame.transform.scale(lostImage, (1240, 720))
+lostImage = pygame.transform.scale(lostImage, (1280, 720))
 
 seaImage = pygame.image.load('img/bg1.png')
-seaImage = pygame.transform.scale(seaImage, (1240, 720))
+seaImage = pygame.transform.scale(seaImage, (1280, 720))
 
 cityImage = pygame.image.load('img/city.jpg')
-cityImage = pygame.transform.scale(cityImage, (1240, 720))
+cityImage = pygame.transform.scale(cityImage, (1280, 720))
 
 waveImage = pygame.image.load('img/wave.png')
 
