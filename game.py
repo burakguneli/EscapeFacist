@@ -372,10 +372,17 @@ def code_to_Escape():
                 game_intro()
 
             if event.type == pygame.KEYDOWN:
+                key = pygame.key.name(event.key)
+
                 if event.key == pygame.K_ESCAPE:
                     game_intro()
 
-                typedWord += pygame.key.name(event.key)
+                if event.key == pygame.K_BACKSPACE:
+                    typedWord = typedWord[:-1]
+
+                if len(key) == 1:
+                    typedWord += pygame.key.name(event.key)
+
 
         gameDisplay.blit(coderImage, [0,0])
 
@@ -394,7 +401,11 @@ def code_to_Escape():
             game_won()
 
         textsurface = text.render(wordArray[selector], False, green)
-        gameDisplay.blit(textsurface,(wordx, wordy))
+        gameDisplay.blit(textsurface, (wordx, wordy))
+
+        textsurface1 = text.render("Your word: " + typedWord, False, white)
+        gameDisplay.blit(textsurface1, (750, 600))
+
         score(success)
 
         pygame.display.update()
