@@ -20,6 +20,15 @@ block_color = (53,115,255)
 
 boat_width = 75
 
+text = pygame.font.Font('freesansbold.ttf', 40)
+
+check = False
+
+choose = 0
+
+click = pygame.mouse.get_pressed()
+mouse_pos = pygame.mouse.get_pos()
+
 backgorundImage = pygame.image.load('img/korea.jpg')
 southSuccessImage = pygame.image.load('img/gate.png')
 southSuccessImage = pygame.transform.scale(southSuccessImage, (1280, 720))
@@ -31,6 +40,12 @@ seaImage = pygame.transform.scale(seaImage, (1280, 720))
 
 cityImage = pygame.image.load('img/city.jpg')
 cityImage = pygame.transform.scale(cityImage, (1280, 720))
+
+courtImage = pygame.image.load('img/courtroom.jpg')
+courtImage = pygame.transform.scale(courtImage, (1280, 720))
+
+coderImage = pygame.image.load('img/coder.jpg')
+coderImage = pygame.transform.scale(coderImage, (1280, 720))
 
 waveImage = pygame.image.load('img/wave.png')
 
@@ -49,3 +64,6 @@ enemyImage = pygame.image.load('img/enemy.png')
 
 bulletImage = pygame.image.load('img/bullet1.png')
 bulletImage = pygame.transform.scale(bulletImage, (15, 25))
+
+wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity"]
+wordArraylen = len(wordArray)

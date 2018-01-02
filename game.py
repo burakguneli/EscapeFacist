@@ -22,15 +22,17 @@ def game_intro():
         gameDisplay.blit(backgorundImage, [0,0])
         largeText = pygame.font.SysFont("comicsansms", 35)
         TextSurf, TextRect = text_objects("Escape North Korea", largeText)
-        TextRect.center = ((display_width/2), (display_height/3.5))
+        TextRect.center = ((display_width/2), 100)
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("Try Sailing to North Korea", ((display_width - 200)/2), 350, 200, 50, green, sailing_game)
-        button("Try Running Trough DMZ", ((display_width - 200)/2), 450, 200, 50, red, shooting_game)
+        button("Try Sailing to North Korea", ((display_width - 200)/2), 150, 200, 50, green, sailing_game)
+        button("Try Running Trough DMZ", ((display_width - 200)/2), 250, 200, 50, green, shooting_game)
+        button("Code to Open Gates", ((display_width - 200)/2), 350, 200, 50, green, code_to_Escape)
+        button("Go to Europe", ((display_width - 200)/2), 450, 200, 50, green, escape_to_Europe)
         button("Exit Game", ((display_width - 200)/2), 550, 200, 50, red, quitgame)
 
         pygame.display.update()
-        clock.tick(15)
+        clock.tick(30)
 
 def game_won():
 
@@ -270,6 +272,133 @@ def shooting_game():
         pygame.display.update()
         clock.tick(30)
 
+def one():
+
+    one = True
+
+    while one:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+        gameDisplay.blit(courtImage, [0,0])
+
+        text = pygame.font.Font('freesansbold.ttf', 40)
+        textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
+        gameDisplay.blit(textsurface,(200,100))
+        button("Bejing", ((display_width - 200)/2), 350, 200, 50, green, None, 1)
+        button("Seoul", ((display_width - 200)/2), 450, 200, 50, green, None, 2)
+
+        pygame.display.update()
+        clock.tick(30)
+
+def two():
+
+    two = True
+
+    while two:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+        gameDisplay.blit(courtImage, [0,0])
+
+        text = pygame.font.Font('freesansbold.ttf', 40)
+        textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
+        gameDisplay.blit(textsurface,(200,100))
+        button("Bejing", ((display_width - 200)/2), 350, 200, 50, green, None, 1)
+        button("Seoul", ((display_width - 200)/2), 450, 200, 50, green, None, 2)
+
+        pygame.display.update()
+        clock.tick(30)
+
+def escape_to_Europe():
+
+    escapeEurope = True
+
+    while escapeEurope:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+        gameDisplay.blit(courtImage, [0,0])
+
+        text = pygame.font.Font('freesansbold.ttf', 40)
+        textsurface = text.render('So you are coming from North Korea. Right?', False, (0, 0, 0))
+
+        button("Yes sir.", ((display_width - 200)/2), 350, 200, 50, green, one, 1)
+        button("Yeah", ((display_width - 200)/2), 450, 200, 50, green, two, 2)
+
+        if decide1 == 1:
+            textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
+
+        if decide1 == 2:
+            textsurface = text.render('Where are you from?', False, (0, 0, 0))
+
+        gameDisplay.blit(textsurface,(200,100))
+
+        pygame.display.update()
+        clock.tick(30)
+
+def code_to_Escape():
+
+    wordx = 0
+    wordy = random.randrange(100, 400)
+    selector = random.randrange(0, wordArraylen)
+    typedWord = ""
+    success = 0
+    baseUp = 10
+
+    code = True
+
+    while code:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+                typedWord += pygame.key.name(event.key)
+
+        gameDisplay.blit(coderImage, [0,0])
+
+        if wordx < (display_width + 5):
+            wordx += baseUp
+        if wordx > display_width:
+            wordx = 0
+            typedWord = ""
+            selector = random.randrange(0, wordArraylen)
+            wordy = random.randrange(100, 400)
+
+        if typedWord == wordArray[selector]:
+            success += 1
+
+        if success > 300:
+            game_won()
+
+        textsurface = text.render(wordArray[selector], False, green)
+        gameDisplay.blit(textsurface,(wordx, wordy))
+        score(success)
+
+        pygame.display.update()
+        clock.tick(30)
+
 game_intro()
-sailing_game()
 quitgame()
