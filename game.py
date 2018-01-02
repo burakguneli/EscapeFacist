@@ -397,8 +397,14 @@ def code_to_Escape():
         if typedWord == wordArray[selector]:
             success += 1
 
+        if len(typedWord) >= len(wordArray[selector]) and typedWord != wordArray[selector]:
+            success -= 0.5
+
         if success > 300:
             game_won()
+
+        if success < -50:
+            game_lost()
 
         textsurface = text.render(wordArray[selector], False, green)
         gameDisplay.blit(textsurface, (wordx, wordy))
