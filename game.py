@@ -47,7 +47,7 @@ def game_won():
 
         gameDisplay.blit(southSuccessImage, [0,0])
 
-        message_display('You are now in South Korea.')
+        message_display('You managed to escape North Korea!')
         time.sleep(3)
         game_intro()
 
@@ -322,7 +322,36 @@ def two():
         pygame.display.update()
         clock.tick(30)
 
+def switch_answers(argument):
+    switcher = {
+        "yes": 'Where are you from?',
+        "yeah": 'You are rood. Where are you from?',
+        "pyongyang": 'How did you came here?',
+        "shenyang": 'You said you were coming from North Korea. Shenyang is in China! You are under arrest!',
+        "plane": 'How did you buy a seat on a plane which comes to Europe?',
+        "car": "How did you passed China?",
+        "usedfakeid": "Congratulations sir you can continue your life in Europe",
+        "oops": "You Lied! We aresenting you back!",
+    }
+    return (switcher.get(argument, "Invalid answer"))
+
+def avaibleWords(argument):
+    switcher = {
+        0: 'yes, yeah',
+        1: 'pyongyang, shenyang',
+        2: 'plane, car',
+        3: 'used fake ID, oops',
+    }
+    return (switcher.get(argument, "Invalid"))
+
 def escape_to_Europe():
+
+    text = pygame.font.Font('freesansbold.ttf', 20)
+
+    questionCounter = 0
+
+    typedWord = ""
+    textsurface = text.render('So you are coming from North Korea. Right?', False, (0, 0, 0))
 
     escapeEurope = True
 
@@ -333,26 +362,43 @@ def escape_to_Europe():
                 game_intro()
 
             if event.type == pygame.KEYDOWN:
+                key = pygame.key.name(event.key)
+
                 if event.key == pygame.K_ESCAPE:
                     game_intro()
 
+                if event.key == pygame.K_BACKSPACE:
+                    typedWord = typedWord[:-1]
+
+                if len(key) == 1:
+                    typedWord += pygame.key.name(event.key)
+
         gameDisplay.blit(courtImage, [0,0])
 
-        text = pygame.font.Font('freesansbold.ttf', 40)
-        textsurface = text.render('So you are coming from North Korea. Right?', False, (0, 0, 0))
+        if typedWord == "yes" or typedWord == "yeah" or typedWord == "pyongyang" or typedWord == "shenyang" or typedWord == "plane" or typedWord == "car" or typedWord == "usedfakeid" or typedWord == "oops":
+            questionCounter += 1
+            textsurface = text.render(switch_answers(typedWord), False, (0, 0, 0))
 
-        button("Yes sir.", ((display_width - 200)/2), 350, 200, 50, green, one, 1)
-        button("Yeah", ((display_width - 200)/2), 450, 200, 50, green, two, 2)
+        textsurface1 = text.render("Your answer: " + typedWord, False, white)
+        textsurface2 = text.render("Avaiable word list: " + avaibleWords(questionCounter), False, white)
 
-        if decide1 == 1:
-            textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
-
-        if decide1 == 2:
-            textsurface = text.render('Where are you from?', False, (0, 0, 0))
-
-        gameDisplay.blit(textsurface,(200,100))
+        gameDisplay.blit(textsurface ,(200,100))
+        gameDisplay.blit(textsurface1, (400, 600))
+        gameDisplay.blit(textsurface2, (300, 550))
 
         pygame.display.update()
+
+        if typedWord == "shenyang" or typedWord == "oops":
+            time.sleep(2)
+            game_lost()
+
+        if typedWord == "usedfakeid":
+            time.sleep(2)
+            game_won()
+
+        if typedWord == "yes" or typedWord == "yeah" or typedWord == "pyongyang" or typedWord == "shenyang" or typedWord == "plane" or typedWord == "car" or typedWord == "usedfakeid" or typedWord == "oops":
+            typedWord = ""
+
         clock.tick(30)
 
 def code_to_Escape():
