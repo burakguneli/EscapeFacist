@@ -272,56 +272,6 @@ def shooting_game():
         pygame.display.update()
         clock.tick(30)
 
-def one():
-
-    one = True
-
-    while one:
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_intro()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    game_intro()
-
-        gameDisplay.blit(courtImage, [0,0])
-
-        text = pygame.font.Font('freesansbold.ttf', 40)
-        textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
-        gameDisplay.blit(textsurface,(200,100))
-        button("Bejing", ((display_width - 200)/2), 350, 200, 50, green, None, 1)
-        button("Seoul", ((display_width - 200)/2), 450, 200, 50, green, None, 2)
-
-        pygame.display.update()
-        clock.tick(30)
-
-def two():
-
-    two = True
-
-    while two:
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_intro()
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    game_intro()
-
-        gameDisplay.blit(courtImage, [0,0])
-
-        text = pygame.font.Font('freesansbold.ttf', 40)
-        textsurface = text.render('You are rood. Where are you from?', False, (0, 0, 0))
-        gameDisplay.blit(textsurface,(200,100))
-        button("Bejing", ((display_width - 200)/2), 350, 200, 50, green, None, 1)
-        button("Seoul", ((display_width - 200)/2), 450, 200, 50, green, None, 2)
-
-        pygame.display.update()
-        clock.tick(30)
-
 def switch_answers(argument):
     switcher = {
         "yes": 'Where are you from?',

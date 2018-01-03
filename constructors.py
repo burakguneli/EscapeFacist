@@ -43,7 +43,7 @@ def score(count):
     text = font.render("Dodged: "+str(count), True, white)
     gameDisplay.blit(text,(0,0))
 
-def button(mesage, x_coordinate, y_coordinate, width, height, color, action = None, decide = None):
+def button(mesage, x_coordinate, y_coordinate, width, height, color, action = None):
     click = pygame.mouse.get_pressed()
     mouse_pos = pygame.mouse.get_pos()
 
@@ -58,6 +58,3 @@ def button(mesage, x_coordinate, y_coordinate, width, height, color, action = No
     if x_coordinate + width > mouse_pos[0] > x_coordinate and y_coordinate + height > mouse_pos[1] > y_coordinate:
         if click[0] == 1 and action != None:
             action()
-
-    if click[0] == 1:
-        decide1 = decide
