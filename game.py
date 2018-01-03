@@ -10,7 +10,7 @@ def game_intro():
     pygame.mouse.set_visible(1)
 
     pygame.mixer.music.load("sound/sytlanta_title.mp3")
-    #pygame.mixer.music.play()
+    pygame.mixer.music.play()
 
     intro = True
 
