@@ -24,7 +24,7 @@ def bullet(x,y):
     gameDisplay.blit(bulletImage, (x, y))
 
 def enemyBullet(x,y):
-    gameDisplay.blit(bulletImage, (x, y))
+    gameDisplay.blit(enemyBulletImage, (x, y))
 
 def wmap(x,y):
     gameDisplay.blit(falseImage, (x, y))
@@ -47,10 +47,10 @@ def message_display(text):
         time.sleep(2)
 
 
-def score(count):
+def score(count, positionx, positiony):
     font = pygame.font.Font('fonts/american.ttf', 20)
     text = font.render("Dodged: " + str(count), True, white)
-    gameDisplay.blit(text, (10, 0))
+    gameDisplay.blit(text, (positionx, positiony))
 
 def button(mesage, x_coordinate, y_coordinate, width, height, color, action = None):
     click = pygame.mouse.get_pressed()

@@ -182,7 +182,7 @@ def sailing_game():
 def shooting_game():
     soldier_y = (display_height * 0.85)
     bullet_y = (display_height * 0.83)
-    shoot_y = 0
+    shoot_y = -1000
 
     enemy_startx = random.randrange(50, 800)
     enemy_startx1 = random.randrange(50, 800)
@@ -217,7 +217,7 @@ def shooting_game():
                     pygame.mixer.music.play()
 
         gameDisplay.blit(cityImage, [0,0])
-        x,y = pygame.mouse.get_pos()
+        x, y = pygame.mouse.get_pos()
         soldier(x, soldier_y)
 
         enemy(enemy_startx, enemy_starty)
@@ -253,7 +253,18 @@ def shooting_game():
                 time.sleep(1)
                 game_lost()
 
+        #shooting enemy soldiers
+        if ((enemy_starty + 80) > shoot_y > enemy_starty) and (x < enemy_startx < (x + 220)):
+            enemy_starty = 900
+            dodged += 1
+            shoot_y = -1000
 
+        if  ((enemy_starty1 + 80) > shoot_y > enemy_starty1) and (x < enemy_startx1 < (x + 220)):
+            enemy_starty1 = 900
+            dodged += 1
+            shoot_y = -1000
+
+        #getting shot by enemy
         if enemy_starty > display_height:
             enemy_starty = -100 - random.randrange(100, 700)
             enemy_startx = random.randrange(0, display_width)
@@ -270,10 +281,10 @@ def shooting_game():
             bullet(shoot_x, shoot_y)
             shoot_y -= 45
 
-        if dodged > 20:
+        if dodged > 40:
             game_won()
 
-        score(dodged)
+        score(dodged, 10, 0)
         pygame.display.update()
         clock.tick(30)
 
@@ -366,6 +377,9 @@ def code_to_Escape():
     typedWord = ""
     success = 0
     baseUp = 10
+    initial_time = 0
+
+    text = pygame.font.Font('fonts/american.ttf', 20)
 
     code = True
 
@@ -386,36 +400,56 @@ def code_to_Escape():
                 if len(key) == 1:
                     typedWord += pygame.key.name(event.key)
 
+        gameDisplay.fill(black)
 
-        gameDisplay.blit(coderImage, [0, 20])
+        if initial_time > 20:
+            textsurface = text.render("Your goal is to hack North Korea's borders password", True, white)
+            gameDisplay.blit(textsurface, (50, 50))
 
-        if wordx < (display_width + 5):
-            wordx += baseUp
-        if wordx > display_width:
-            wordx = 0
-            typedWord = ""
-            selector = random.randrange(0, wordArraylen)
-            wordy = random.randrange(100, 400)
+        if initial_time > 80:
+            textsurface1 = text.render("You need to type faster than syber securities!", True, white)
+            gameDisplay.blit(textsurface1, (50, 100))
 
-        if typedWord == wordArray[selector]:
-            success += 1
+        if initial_time > 140:
+            textsurface2 = text.render("If you can reach 500 points you will win", True, white)
+            gameDisplay.blit(textsurface2, (50, 150))
 
-        if len(typedWord) >= len(wordArray[selector]) and typedWord != wordArray[selector]:
-            success -= 0.5
+        if initial_time > 190:
+            textsurface3 = text.render("Get ready game is about to begin!", True, white)
+            gameDisplay.blit(textsurface3, (50, 200))
 
-        if success > 300:
-            game_won()
+        if initial_time > 230:
+            gameDisplay.blit(coderImage, [0, 0])
 
-        if success < -50:
-            game_lost()
+            if wordx < (display_width + 5):
+                wordx += baseUp
+            if wordx > display_width:
+                wordx = 0
+                typedWord = ""
+                selector = random.randrange(0, wordArraylen)
+                wordy = random.randrange(100, 400)
 
-        textsurface = text.render(wordArray[selector], True, green)
-        gameDisplay.blit(textsurface, (wordx, wordy))
+            if typedWord == wordArray[selector]:
+                success += 1
 
-        textsurface1 = text.render("Your word: " + typedWord, True, white)
-        gameDisplay.blit(textsurface1, (750, 600))
+            if len(typedWord) >= len(wordArray[selector]) and typedWord != wordArray[selector]:
+                success -= 0.5
 
-        score(success)
+            if success > 300:
+                game_won()
+
+            if success < -50:
+                game_lost()
+
+            textsurface = text.render(wordArray[selector], True, green)
+            gameDisplay.blit(textsurface, (wordx, wordy))
+
+            textsurface1 = text.render("Your word: " + typedWord, True, white)
+            gameDisplay.blit(textsurface1, (750, 600))
+
+            score(success, (display_width - 100), 0)
+
+        initial_time += 1
 
         pygame.display.update()
         clock.tick(30)
@@ -425,8 +459,8 @@ def find_map():
 
     text = pygame.font.Font('fonts/american.ttf', 20)
 
-    initial_time = 0;
     typedWord = ''
+    initial_time = 0
 
     findMap = True
 
