@@ -155,14 +155,14 @@ def sailing_game():
                     time.sleep(1)
                     game_won()
 
-        if boat_y < rock_starty + rock_height:
+        if boat_y < rock_starty + rock_height and rock_starty < display_height:
 
             if boat_x > rock_startx and boat_x < rock_startx + rock_width or boat_x + boat_width > rock_startx and boat_x + boat_width < rock_startx + rock_width:
                 message_display('You crashed to a rock')
                 time.sleep(1)
                 game_lost()
 
-        if boat_y < rock_starty1 + rock_height:
+        if boat_y < rock_starty1 + rock_height and rock_starty1 < display_height:
 
             if boat_x > rock_startx1 and boat_x < rock_startx1 + rock_width or boat_x + boat_width > rock_startx1 and boat_x + boat_width < rock_startx1 + rock_width:
                 message_display('You crashed to a rock')
