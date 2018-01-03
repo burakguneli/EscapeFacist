@@ -23,6 +23,12 @@ def enemy(x,y):
 def bullet(x,y):
     gameDisplay.blit(bulletImage, (x,y))
 
+def wmap(x,y):
+    gameDisplay.blit(falseImage, (x,y))
+
+def tmap(x,y):
+    gameDisplay.blit(trueImage, (x,y))
+
 def text_objects(text, font):
     textSurface = font.render(text, True, white)
     return textSurface, textSurface.get_rect()

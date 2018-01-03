@@ -50,7 +50,7 @@ def game_won():
 
         gameDisplay.blit(southSuccessImage, [0,0])
 
-        message_display('You managed to escape North Korea!')
+        message_display('You managed to escape from North Korea!')
         time.sleep(3)
         game_intro()
 
@@ -65,7 +65,7 @@ def game_lost():
             if event.type == pygame.QUIT:
                 quitgame()
 
-        gameDisplay.blit(lostImage, [0,0])
+        gameDisplay.blit(looseImage, [0,0])
 
         message_display('You died. Redirecting to main menu')
         time.sleep(2)
@@ -426,6 +426,7 @@ def find_map():
     text = pygame.font.Font('freesansbold.ttf', 15)
 
     initial_time = 0;
+    typedWord = ''
 
     findMap = True
 
@@ -467,6 +468,28 @@ def find_map():
         if initial_time > 230:
             textsurface5 = text.render("Right map contains a red base close to 'TORP'", False, white)
             gameDisplay.blit(textsurface5, (50, 250))
+
+        if initial_time > 280:
+            wmap(385, 300)
+
+        if initial_time > 310:
+            tmap(620, 300)
+
+        if initial_time > 330:
+            textsurface6 = text.render("Which one is true map? first or second?: " + typedWord, False, white)
+            gameDisplay.blit(textsurface6, (380, 700))
+
+        if typedWord == 'first' or typedWord == '1':
+            gameDisplay.fill(black)
+            message_display('You selected the wrong one!')
+            time.sleep(3)
+            game_lost()
+
+        if typedWord == 'second' or typedWord == '2':
+            gameDisplay.fill(black)
+            message_display('You selected the right one!')
+            time.sleep(3)
+            game_won()
 
         initial_time += 1
 

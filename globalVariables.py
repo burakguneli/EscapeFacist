@@ -30,8 +30,8 @@ mouse_pos = pygame.mouse.get_pos()
 backgorundImage = pygame.image.load('img/korea.jpg')
 southSuccessImage = pygame.image.load('img/gate.png')
 southSuccessImage = pygame.transform.scale(southSuccessImage, (1280, 720))
-lostImage = pygame.image.load('img/blizzardskull.png')
-lostImage = pygame.transform.scale(lostImage, (1280, 720))
+looseImage = pygame.image.load('img/blizzardskull.png')
+looseImage = pygame.transform.scale(looseImage, (1280, 720))
 
 seaImage = pygame.image.load('img/bg1.png')
 seaImage = pygame.transform.scale(seaImage, (1280, 720))
@@ -56,6 +56,12 @@ whaleImg = pygame.image.load('img/whale.png')
 
 boatImage = pygame.image.load('img/ge1.png')
 boatImage = pygame.transform.scale(boatImage, (75, 120))
+
+trueImage = pygame.image.load('img/true_map.jpg')
+trueImage = pygame.transform.scale(trueImage, (225, 360))
+
+falseImage = pygame.image.load('img/wrong_map.jpg')
+falseImage = pygame.transform.scale(falseImage, (225, 360))
 
 soldierImage = pygame.image.load('img/soldier.png')
 enemyImage = pygame.image.load('img/enemy.png')
