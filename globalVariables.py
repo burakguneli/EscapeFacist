@@ -24,8 +24,6 @@ text = pygame.font.Font('freesansbold.ttf', 40)
 
 check = False
 
-choose = 0
-
 click = pygame.mouse.get_pressed()
 mouse_pos = pygame.mouse.get_pos()
 

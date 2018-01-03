@@ -4,6 +4,7 @@ def quitgame():
     pygame.quit()
     quit()
 
+
 def game_intro():
 
     pygame.mouse.set_visible(1)
@@ -22,17 +23,19 @@ def game_intro():
         gameDisplay.blit(backgorundImage, [0,0])
         largeText = pygame.font.SysFont("comicsansms", 35)
         TextSurf, TextRect = text_objects("Escape North Korea", largeText)
-        TextRect.center = ((display_width/2), 100)
+        TextRect.center = ((display_width/2), 50)
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("Try Sailing to North Korea", ((display_width - 200)/2), 150, 200, 50, green, sailing_game)
-        button("Try Running Trough DMZ", ((display_width - 200)/2), 250, 200, 50, green, shooting_game)
-        button("Code to Open Gates", ((display_width - 200)/2), 350, 200, 50, green, code_to_Escape)
-        button("Go to Europe", ((display_width - 200)/2), 450, 200, 50, green, escape_to_Europe)
-        button("Exit Game", ((display_width - 200)/2), 550, 200, 50, red, quitgame)
+        button("Try Sailing to North Korea", ((display_width - 200)/2), 100, 200, 50, green, sailing_game)
+        button("Try Running Trough DMZ", ((display_width - 200)/2), 200, 200, 50, green, shooting_game)
+        button("Code to Open Gates", ((display_width - 200)/2), 300, 200, 50, green, code_to_Escape)
+        button("Go to Europe", ((display_width - 200)/2), 400, 200, 50, green, escape_to_Europe)
+        button("Asia Underground Railroad", ((display_width - 200)/2), 500, 200, 50, green, find_map)
+        button("Exit Game", ((display_width - 200)/2), 600, 200, 50, red, quitgame)
 
         pygame.display.update()
         clock.tick(30)
+
 
 def game_won():
 
@@ -67,6 +70,7 @@ def game_lost():
         message_display('You died. Redirecting to main menu')
         time.sleep(2)
         game_intro()
+
 
 def sailing_game():
 
@@ -174,6 +178,7 @@ def sailing_game():
         pygame.display.update()
         clock.tick(30)
 
+
 def shooting_game():
     soldier_y = (display_height * 0.85)
     bullet_y = (display_height * 0.83)
@@ -272,6 +277,7 @@ def shooting_game():
         pygame.display.update()
         clock.tick(30)
 
+
 def switch_answers(argument):
     switcher = {
         "yes": 'Where are you from?',
@@ -351,6 +357,7 @@ def escape_to_Europe():
 
         clock.tick(30)
 
+
 def code_to_Escape():
 
     wordx = 0
@@ -409,6 +416,59 @@ def code_to_Escape():
         gameDisplay.blit(textsurface1, (750, 600))
 
         score(success)
+
+        pygame.display.update()
+        clock.tick(30)
+
+
+def find_map():
+
+    text = pygame.font.Font('freesansbold.ttf', 15)
+
+    initial_time = 0;
+
+    findMap = True
+
+    while findMap:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_intro()
+
+            if event.type == pygame.KEYDOWN:
+                key = pygame.key.name(event.key)
+
+                if event.key == pygame.K_ESCAPE:
+                    game_intro()
+
+                if event.key == pygame.K_BACKSPACE:
+                    typedWord = typedWord[:-1]
+
+                if len(key) == 1:
+                    typedWord += pygame.key.name(event.key)
+
+        gameDisplay.fill(black)
+
+        if initial_time > 20:
+            textsurface = text.render("Asia Underground Railroad is a very though road", False, white)
+            gameDisplay.blit(textsurface, (50, 50))
+
+        if initial_time > 80:
+            textsurface1 = text.render("But if you can manage to find the right path, you can escape!", False, white)
+            gameDisplay.blit(textsurface1, (50, 100))
+
+        if initial_time > 140:
+            textsurface2 = text.render("But unfortunetly, North Korean and Chineese Government changed the map", False, white)
+            gameDisplay.blit(textsurface2, (50, 150))
+
+        if initial_time > 190:
+            textsurface3 = text.render("You need to choose the right map!", False, white)
+            gameDisplay.blit(textsurface3, (50, 200))
+
+        if initial_time > 230:
+            textsurface5 = text.render("Right map contains a red base close to 'TORP'", False, white)
+            gameDisplay.blit(textsurface5, (50, 250))
+
+        initial_time += 1
 
         pygame.display.update()
         clock.tick(30)
