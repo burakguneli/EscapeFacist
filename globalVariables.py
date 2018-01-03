@@ -69,5 +69,8 @@ enemyImage = pygame.image.load('img/enemy.png')
 bulletImage = pygame.image.load('img/bullet1.png')
 bulletImage = pygame.transform.scale(bulletImage, (15, 25))
 
+enemyBulletImage = pygame.image.load('img/upwardsBullet.png')
+enemyBulletImage = pygame.transform.scale(enemyBulletImage, (15, 25))
+
 wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity", "ifheadquarter"]
 wordArraylen = len(wordArray)

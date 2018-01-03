@@ -23,6 +23,9 @@ def enemy(x,y):
 def bullet(x,y):
     gameDisplay.blit(bulletImage, (x, y))
 
+def enemyBullet(x,y):
+    gameDisplay.blit(bulletImage, (x, y))
+
 def wmap(x,y):
     gameDisplay.blit(falseImage, (x, y))
 

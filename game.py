@@ -232,7 +232,7 @@ def shooting_game():
                 bulletStart = enemy_starty
                 firstCheck = 0
 
-            bullet(enemy_startx, bulletStart)
+            enemyBullet(enemy_startx, bulletStart)
             bulletStart += 25
 
             if soldier_y <= bulletStart <= display_height and x < enemy_startx < (x + 50):
@@ -245,7 +245,7 @@ def shooting_game():
                 bulletStart1 = enemy_starty1
                 firstCheck1 = 0
 
-            bullet(enemy_startx1, bulletStart1)
+            enemyBullet(enemy_startx1, bulletStart1)
             bulletStart1 += 25
 
             if soldier_y <= bulletStart1 <= display_height and x < enemy_startx1 < (x + 50):
