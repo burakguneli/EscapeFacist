@@ -10,7 +10,7 @@ def game_intro():
     pygame.mouse.set_visible(1)
 
     pygame.mixer.music.load("sound/sytlanta_title.mp3")
-    pygame.mixer.music.play()
+    #pygame.mixer.music.play()
 
     intro = True
 
@@ -21,17 +21,17 @@ def game_intro():
                 quitgame()
 
         gameDisplay.blit(backgorundImage, [0,0])
-        largeText = pygame.font.SysFont("comicsansms", 35)
+        largeText = pygame.font.Font("fonts/american.ttf", 25)
         TextSurf, TextRect = text_objects("Escape North Korea", largeText)
         TextRect.center = ((display_width/2), 50)
         gameDisplay.blit(TextSurf, TextRect)
 
-        button("Try Sailing to North Korea", ((display_width - 200)/2), 100, 200, 50, green, sailing_game)
-        button("Try Running Trough DMZ", ((display_width - 200)/2), 200, 200, 50, green, shooting_game)
-        button("Code to Open Gates", ((display_width - 200)/2), 300, 200, 50, green, code_to_Escape)
-        button("Go to Europe", ((display_width - 200)/2), 400, 200, 50, green, escape_to_Europe)
-        button("Asia Underground Railroad", ((display_width - 200)/2), 500, 200, 50, green, find_map)
-        button("Exit Game", ((display_width - 200)/2), 600, 200, 50, red, quitgame)
+        button("Try Sailing to North Korea", ((display_width - 200)/2), 100, 220, 50, green, sailing_game)
+        button("Try Running Trough DMZ", ((display_width - 200)/2), 200, 220, 50, green, shooting_game)
+        button("Code to Open Gates", ((display_width - 200)/2), 300, 220, 50, green, code_to_Escape)
+        button("Go to Europe", ((display_width - 200)/2), 400, 220, 50, green, escape_to_Europe)
+        button("Asia Underground Railroad", ((display_width - 200)/2), 500, 220, 50, green, find_map)
+        button("Exit Game", ((display_width - 200)/2), 600, 220, 50, red, quitgame)
 
         pygame.display.update()
         clock.tick(30)
@@ -302,12 +302,12 @@ def avaibleWords(argument):
 
 def escape_to_Europe():
 
-    text = pygame.font.Font('freesansbold.ttf', 20)
+    text = pygame.font.Font('fonts/american.ttf', 20)
 
     questionCounter = 0
 
     typedWord = ""
-    textsurface = text.render('So you are coming from North Korea. Right?', False, (0, 0, 0))
+    textsurface = text.render('So you are coming from North Korea. Right?', True, (0, 0, 0))
 
     escapeEurope = True
 
@@ -333,10 +333,10 @@ def escape_to_Europe():
 
         if typedWord == "yes" or typedWord == "yeah" or typedWord == "pyongyang" or typedWord == "shenyang" or typedWord == "plane" or typedWord == "car" or typedWord == "usedfakeid" or typedWord == "oops":
             questionCounter += 1
-            textsurface = text.render(switch_answers(typedWord), False, (0, 0, 0))
+            textsurface = text.render(switch_answers(typedWord), True, (0, 0, 0))
 
-        textsurface1 = text.render("Your answer: " + typedWord, False, white)
-        textsurface2 = text.render("Avaiable word list: " + avaibleWords(questionCounter), False, white)
+        textsurface1 = text.render("Your answer: " + typedWord, True, white)
+        textsurface2 = text.render("Avaiable word list: " + avaibleWords(questionCounter), True, white)
 
         gameDisplay.blit(textsurface ,(200,100))
         gameDisplay.blit(textsurface1, (400, 600))
@@ -387,7 +387,7 @@ def code_to_Escape():
                     typedWord += pygame.key.name(event.key)
 
 
-        gameDisplay.blit(coderImage, [0,0])
+        gameDisplay.blit(coderImage, [0, 20])
 
         if wordx < (display_width + 5):
             wordx += baseUp
@@ -409,10 +409,10 @@ def code_to_Escape():
         if success < -50:
             game_lost()
 
-        textsurface = text.render(wordArray[selector], False, green)
+        textsurface = text.render(wordArray[selector], True, green)
         gameDisplay.blit(textsurface, (wordx, wordy))
 
-        textsurface1 = text.render("Your word: " + typedWord, False, white)
+        textsurface1 = text.render("Your word: " + typedWord, True, white)
         gameDisplay.blit(textsurface1, (750, 600))
 
         score(success)
@@ -423,7 +423,7 @@ def code_to_Escape():
 
 def find_map():
 
-    text = pygame.font.Font('freesansbold.ttf', 15)
+    text = pygame.font.Font('fonts/american.ttf', 20)
 
     initial_time = 0;
     typedWord = ''
@@ -450,23 +450,23 @@ def find_map():
         gameDisplay.fill(black)
 
         if initial_time > 20:
-            textsurface = text.render("Asia Underground Railroad is a very though road", False, white)
+            textsurface = text.render("Asia Underground Railroad is a very though road", True, white)
             gameDisplay.blit(textsurface, (50, 50))
 
         if initial_time > 80:
-            textsurface1 = text.render("But if you can manage to find the right path, you can escape!", False, white)
+            textsurface1 = text.render("But if you can manage to find the right path, you can escape!", True, white)
             gameDisplay.blit(textsurface1, (50, 100))
 
         if initial_time > 140:
-            textsurface2 = text.render("But unfortunetly, North Korean and Chineese Government changed the map", False, white)
+            textsurface2 = text.render("But unfortunetly, North Korean and Chineese Government changed the map", True, white)
             gameDisplay.blit(textsurface2, (50, 150))
 
         if initial_time > 190:
-            textsurface3 = text.render("You need to choose the right map!", False, white)
+            textsurface3 = text.render("You need to choose the right map!", True, white)
             gameDisplay.blit(textsurface3, (50, 200))
 
         if initial_time > 230:
-            textsurface5 = text.render("Right map contains a red base close to 'TORP'", False, white)
+            textsurface5 = text.render("Right map contains a red base close to 'TORP'", True, white)
             gameDisplay.blit(textsurface5, (50, 250))
 
         if initial_time > 280:
@@ -476,7 +476,7 @@ def find_map():
             tmap(620, 300)
 
         if initial_time > 330:
-            textsurface6 = text.render("Which one is true map? first or second?: " + typedWord, False, white)
+            textsurface6 = text.render("Which one is true map? first or second?: " + typedWord, True, white)
             gameDisplay.blit(textsurface6, (380, 700))
 
         if typedWord == 'first' or typedWord == '1':

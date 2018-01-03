@@ -8,19 +8,19 @@ pygame.mixer.init()
 display_width = 1280
 display_height = 720
 
-black = (0,0,0)
-white = (255,255,255)
-red = (255,0,0)
-transparent_red = (255,0,0,0.3)
-green = (0, 255, 0)
-bright_red = (255,0,0)
-bright_green = (0,255,0)
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+transparent_red = (255, 0, 0, 0.3)
+green = (0, 170, 0)
+bright_red = (255, 0, 0)
+bright_green = (0, 255, 0)
 
-block_color = (53,115,255)
+block_color = (53, 115, 255)
 
 boat_width = 75
 
-text = pygame.font.Font('freesansbold.ttf', 40)
+text = pygame.font.Font('fonts/american.ttf', 40)
 
 check = False
 
@@ -47,7 +47,7 @@ coderImage = pygame.transform.scale(coderImage, (1280, 720))
 
 waveImage = pygame.image.load('img/wave.png')
 
-gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
+gameDisplay = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
 pygame.display.set_caption('Escape North Korea')
 clock = pygame.time.Clock()
 
@@ -69,5 +69,5 @@ enemyImage = pygame.image.load('img/enemy.png')
 bulletImage = pygame.image.load('img/bullet1.png')
 bulletImage = pygame.transform.scale(bulletImage, (15, 25))
 
-wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity"]
+wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity", "ifheadquarter"]
 wordArraylen = len(wordArray)
