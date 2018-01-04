@@ -72,5 +72,5 @@ bulletImage = pygame.transform.scale(bulletImage, (15, 25))
 enemyBulletImage = pygame.image.load('img/upwardsBullet.png')
 enemyBulletImage = pygame.transform.scale(enemyBulletImage, (15, 25))
 
-wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity", "ifheadquarter"]
+wordArray = ["defmain", "whiletrue", "helloworld", "escapenorthkorea", "print", "complexity", "ifheadquarter", "construct", "structure", "displayblit"]
 wordArraylen = len(wordArray)

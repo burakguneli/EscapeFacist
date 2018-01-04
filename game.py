@@ -307,13 +307,16 @@ def avaibleWords(argument):
         0: 'yes, yeah',
         1: 'pyongyang, shenyang',
         2: 'plane, car',
-        3: 'used fake ID, oops',
+        3: 'usedfakeid, oops',
     }
     return (switcher.get(argument, "Invalid"))
 
 def escape_to_Europe():
 
-    text = pygame.font.Font('fonts/american.ttf', 20)
+    pygame.mixer.music.load("sound/courtroom.mp3")
+    pygame.mixer.music.play()
+
+    text = pygame.font.Font('fonts/american.ttf', 25)
 
     questionCounter = 0
 
@@ -349,9 +352,9 @@ def escape_to_Europe():
         textsurface1 = text.render("Your answer: " + typedWord, True, white)
         textsurface2 = text.render("Avaiable word list: " + avaibleWords(questionCounter), True, white)
 
-        gameDisplay.blit(textsurface ,(200,100))
-        gameDisplay.blit(textsurface1, (400, 600))
-        gameDisplay.blit(textsurface2, (300, 550))
+        gameDisplay.blit(textsurface ,(100, 50))
+        gameDisplay.blit(textsurface1, (100, 650))
+        gameDisplay.blit(textsurface2, (100, 600))
 
         pygame.display.update()
 
@@ -378,6 +381,9 @@ def code_to_Escape():
     success = 0
     baseUp = 10
     initial_time = 0
+
+    pygame.mixer.music.load("sound/hackeffect.mp3")
+    pygame.mixer.music.play()
 
     text = pygame.font.Font('fonts/american.ttf', 20)
 
@@ -447,7 +453,7 @@ def code_to_Escape():
             textsurface1 = text.render("Your word: " + typedWord, True, white)
             gameDisplay.blit(textsurface1, (750, 600))
 
-            score(success, (display_width - 100), 0)
+            score(success, (display_width - 150), 0)
 
         initial_time += 1
 

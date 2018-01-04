@@ -49,7 +49,7 @@ def message_display(text):
 
 def score(count, positionx, positiony):
     font = pygame.font.Font('fonts/american.ttf', 20)
-    text = font.render("Dodged: " + str(count), True, white)
+    text = font.render("Score: " + str(count), True, white)
     gameDisplay.blit(text, (positionx, positiony))
 
 def button(mesage, x_coordinate, y_coordinate, width, height, color, action = None):
